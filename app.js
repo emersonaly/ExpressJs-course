@@ -34,6 +34,30 @@ app.get('/search', (req, res) => {
     <p>Categoria: <strong>${category}</strong></p> `)
 })
 
+app.post('/form', (req,res) => {
+  const name = req.body.name || 'no envio name';
+  const email = req.body.email || 'no envio email';
+  
+  res.json({message: 'Formulario recibido', 
+    data: {
+      name, 
+      email
+    }})
+})
+
+app.post('/api/data', (req,res) => {
+  const data = req.body;
+  if (!data || Object.keys(data).length === 0) {
+    return res.status(400).json({ error: 'No se recibio data' })
+  }
+
+  res.status(201).json({
+    message: 'Data recibida correctamente',
+    data: data
+  })
+})
+
+
 app.listen(PORT, () => {
   console.log(`Server running on port http://localhost:${PORT}`);
 });
