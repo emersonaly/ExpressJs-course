@@ -87,7 +87,7 @@ app.get('/users', (req,res) => {
 
 // 1. Las reglas de validación se pasan como un array de middlewares (segundo argumento)
 app.post('/users', [
-  body('id').isNumeric().withMessage('Id debe ser un número'),
+  body('id').isInt().not().isString().withMessage('Id debe ser un entero no un string'),
   body('name').trim().isLength({ min: 3}).withMessage('Nombre muy corto'),
   body('email').isEmail().withMessage('Email inválido')
 ], (req, res) => {
@@ -159,6 +159,38 @@ app.post('/users', [
 
 // })
 
+app.put('/users/:id', (req,res) => {
+  const userId = parseInt(req.params.id);
+  const updatedUser = req.body;
+  fs.readFile(usersFilePath, 'utf-8', (err, data) => {
+    if (err) {
+      console.error("Error al leer:", err);
+      return res.status(500).json({ error: "Error al leer la base de datos" });
+    }
+    try {
+        let users = JSON.parse(data);
+        const userIndex = users.findIndex(u => u.id === userId);
+        if(userIndex === -1){
+          return res.status(404).json({ error: "Usuario no encontrado" });
+        }
+        // Solo actualizamos los datos que se envian en el body, no sobrescribimos el id
+        const { id, ...restOfData } = req.body;
+        const userToUpdate = { ...users[userIndex], ...restOfData };
+        users[userIndex] = userToUpdate;
+
+        fs.writeFile(usersFilePath, JSON.stringify(users, null, 2), (err) => {
+          if (err) {
+            console.error("Error al actualizar:", err);
+            return res.status(500).json({ error: "Error al actualizar el usuario" });
+          }
+          res.status(200).json({ message: "Usuario actualizado", user: userToUpdate });
+        });
+    }
+    catch (parseError) {
+      res.status(500).json({ error: "Error al procesar el archivo JSON" });
+    }
+  });
+})
 
 
 app.listen(PORT, () => {
