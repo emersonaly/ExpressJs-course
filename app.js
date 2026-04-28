@@ -5,6 +5,7 @@ import { validateCreateUser, validateUpdateUser, checkValidationErrors } from '.
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import loggerMiddleware from './middlewares/logger.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,6 +17,7 @@ const usersFilePath = path.join(__dirname, 'users.json');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(loggerMiddleware);
 
 app.get("/", (req, res) => {
   res.send(
@@ -74,7 +76,6 @@ app.get('/users', (req,res) => {
       res.status(500).json({ error: "Error interno del servidor" });
     }
     const users = JSON.parse(data);
-    console.log(users);
     res.json(users);
   })
   }
