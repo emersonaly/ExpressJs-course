@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
-import { body, validationResult } from 'express-validator';
 import bodyParser from "body-parser";
+import { validateCreateUser, validateUpdateUser, checkValidationErrors } from './validators.js';
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -85,18 +85,7 @@ app.get('/users', (req,res) => {
 
 })
 
-// 1. Las reglas de validación se pasan como un array de middlewares (segundo argumento)
-app.post('/users', [
-  body('id').isInt().not().isString().withMessage('Id debe ser un entero no un string'),
-  body('name').trim().isLength({ min: 3}).withMessage('Nombre muy corto'),
-  body('email').isEmail().withMessage('Email inválido')
-], (req, res) => {
-
-  // 2. Verificamos si los validadores de arriba encontraron errores
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
+app.post('/users', validateCreateUser, checkValidationErrors, (req, res) => {
 
   const newUser = req.body;
 
@@ -159,7 +148,7 @@ app.post('/users', [
 
 // })
 
-app.put('/users/:id', (req,res) => {
+app.put('/users/:id', validateUpdateUser, checkValidationErrors, (req,res) => {
   const userId = parseInt(req.params.id);
   const updatedUser = req.body;
   fs.readFile(usersFilePath, 'utf-8', (err, data) => {
@@ -191,6 +180,30 @@ app.put('/users/:id', (req,res) => {
     }
   });
 })
+
+app.delete('/users/:id', (req, res) => {
+  const userId = parseInt(req.params.id);
+
+  fs.readFile(usersFilePath, 'utf-8', (err, data) => {
+    if (err) {
+      return res.status(500).json({ error: "Error al leer la base de datos" });
+    }
+
+    try {
+      let users = JSON.parse(data);
+      let usersFiltered = users.filter(u => u.id !== userId);
+
+      fs.writeFile(usersFilePath, JSON.stringify(usersFiltered, null, 2), (err) => {
+        if (err) {
+          return res.status(500).json({ error: "Error al guardar los cambios" });
+        }
+        res.status(204).send();
+      });
+    } catch (parseError) {
+      res.status(500).json({ error: "Error al procesar el archivo JSON" });
+    }
+  });
+});
 
 
 app.listen(PORT, () => {
