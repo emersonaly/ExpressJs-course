@@ -6,6 +6,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import loggerMiddleware from './middlewares/logger.js';
+import errorHandler from './middlewares/errorHandler.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,6 +19,7 @@ const usersFilePath = path.join(__dirname, 'users.json');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(loggerMiddleware);
+app.use(errorHandler);
 
 app.get("/", (req, res) => {
   res.send(
@@ -205,6 +207,15 @@ app.delete('/users/:id', (req, res) => {
     }
   });
 });
+
+app.get('/error', (req, res, next) => {
+  next(new Error('Error de prueba'));
+})
+
+// Manejo de rutas no encontradas
+app.use((req, res, next) => {
+  res.status(404).json({ error: "Ruta no encontrada" });
+})
 
 
 app.listen(PORT, () => {
