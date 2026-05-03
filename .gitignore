@@ -142,3 +142,10 @@ dist
 .svelte-kit
 
 # End of https://www.toptal.com/developers/gitignore/api/node
+/generated/prisma
+generated/client
+generated/
+
+.vscode
+
+./prisma/migrations/migration_lock

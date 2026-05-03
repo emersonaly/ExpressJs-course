@@ -7,9 +7,16 @@ import path from "path";
 import { fileURLToPath } from "url";
 import loggerMiddleware from './middlewares/logger.js';
 import errorHandler from './middlewares/errorHandler.js';
+import { PrismaClient } from './generated/client/index.js';
+import { PrismaPg } from '@prisma/adapter-pg';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+});
+const prisma = new PrismaClient({ adapter });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -211,6 +218,18 @@ app.delete('/users/:id', (req, res) => {
 app.get('/error', (req, res, next) => {
   next(new Error('Error de prueba'));
 })
+
+//test DB
+app.get('/db-users', async (req, res) => {
+  try {
+    const users = await prisma.user.findMany();
+    res.json(users);
+  } catch (error) {
+    console.error("Error al obtener usuarios:", error);
+    res.status(500).json({ error: "Error al obtener usuarios" });
+  }
+})
+
 
 // Manejo de rutas no encontradas
 app.use((req, res, next) => {
