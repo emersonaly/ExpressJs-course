@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import bodyParser from "body-parser";
+import bcrypt from "bcryptjs";
 import { validateCreateUser, validateUpdateUser, checkValidationErrors } from './validators.js';
 import fs from "fs";
 import path from "path";
@@ -9,6 +10,9 @@ import loggerMiddleware from './middlewares/logger.js';
 import errorHandler from './middlewares/errorHandler.js';
 import { PrismaClient } from './generated/client/index.js';
 import { PrismaPg } from '@prisma/adapter-pg';
+import autenticateToken from "./middlewares/auth.js";
+import jwt from "jsonwebtoken";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(loggerMiddleware);
 app.use(errorHandler);
+// app.use(autenticateToken);
 
 app.get("/", (req, res) => {
   res.send(
@@ -230,12 +235,44 @@ app.get('/db-users', async (req, res) => {
   }
 })
 
+app.get('/protected-route', autenticateToken, (req, res) => {
+  res.send(`Ruta protegida`) 
+})
+
+app.post('/register', async (req, res) => {
+  const {name, password, email} = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const newUser = await prisma.user.create({
+    data: {
+      name, 
+      password: hashedPassword,
+      email,
+      role: 'USER'
+    }
+  })
+  res.status(201).json({ message: "User registered successfully", user: newUser });
+})
+
+app.post('/login', async (req, res) => {
+  const {email, password} = req.body;
+  const user = await prisma.user.findUnique({ where: { email } });
+
+  if (!user) return res.status(400).json({ error: "Invalid email or password" });
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordValid) return res.status(400).json({ error: "Invalid email or password" });
+
+  const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "4h" });
+  res.json({ token });
+  
+})  
 
 // Manejo de rutas no encontradas
 app.use((req, res, next) => {
   res.status(404).json({ error: "Ruta no encontrada" });
 })
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port http://localhost:${PORT}`);
