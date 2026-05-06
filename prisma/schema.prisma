@@ -19,7 +19,11 @@ enum Role {
 
 model Appointment {
   id        Int      @id @default(autoincrement())
+  date      DateTime
   userId    Int
+  timeBlockId Int
+  timeBlock   TimeBlock @relation(fields: [timeBlockId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -30,8 +34,14 @@ model User {
   email     String   @unique
   password  String
   role      Role
-  // appointments Appointment[]
+  appointments Appointment[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
+model TimeBlock {
+  id           Int           @id @default(autoincrement())
+  startTime    DateTime
+  endTime      DateTime
+  appointments Appointment[]
+}
