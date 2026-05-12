@@ -2,25 +2,18 @@ import "dotenv/config";
 import express from "express";
 import bodyParser from "body-parser";
 import bcrypt from "bcryptjs";
-import { validateCreateUser, validateUpdateUser, checkValidationErrors } from './validators.js';
+import { validateCreateUser, validateUpdateUser, checkValidationErrors } from './src/utils/validators.js';
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import loggerMiddleware from './middlewares/logger.js';
-import errorHandler from './middlewares/errorHandler.js';
-import { PrismaClient } from './generated/client/index.js';
-import { PrismaPg } from '@prisma/adapter-pg';
-import autenticateToken from "./middlewares/auth.js";
+import loggerMiddleware from './src/middlewares/logger.js';
+import errorHandler from './src/middlewares/errorHandler.js';
+import prisma from './src/db.js';
+import autenticateToken from "./src/middlewares/auth.js";
 import jwt from "jsonwebtoken";
-
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
-});
-const prisma = new PrismaClient({ adapter });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
