@@ -1,0 +1,571 @@
+{
+  "v": 12,
+  "id": "cmohkjw7a3vq5ht1m7ojxzdky",
+  "name": "express-course",
+  "folders": [
+    {
+      "v": 12,
+      "id": "cmoumge4q36c3ir1lg45sim4v",
+      "name": "first stage",
+      "folders": [],
+      "requests": [
+        {
+          "v": "17",
+          "name": "Post Api Data",
+          "method": "POST",
+          "endpoint": "<<host>>/api/data",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"clave1\":\"clave1\",\n  \"clave2\":\"clave2\"\n}"
+          },
+          "requestVariables": [],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "name": "Post Form",
+          "method": "POST",
+          "endpoint": "<<host>>/form",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/x-www-form-urlencoded",
+            "body": "name: carlos\nemail: carlos@mail.com"
+          },
+          "requestVariables": [],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "name": "Get users",
+          "method": "GET",
+          "endpoint": "<<host>>/users",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/x-www-form-urlencoded",
+            "body": ""
+          },
+          "requestVariables": [],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "name": "Post Create user",
+          "method": "POST",
+          "endpoint": "<<host>>/users",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"id\": 7,\n  \"name\": \"jose\",\n  \"email\": \"joses@mail.com\"\n}\n"
+          },
+          "requestVariables": [],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "name": "Delete user",
+          "method": "DELETE",
+          "endpoint": "<<host>>/users/<<id>>",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/x-www-form-urlencoded",
+            "body": ""
+          },
+          "requestVariables": [
+            {
+              "key": "id",
+              "value": "7",
+              "active": true
+            }
+          ],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "name": "Put update user",
+          "method": "PUT",
+          "endpoint": "<<host>>/users/<<id>>",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/x-www-form-urlencoded",
+            "body": "name: usdre 3\nemail: dsfwr34333d@mail.com\nid: 3"
+          },
+          "requestVariables": [
+            {
+              "key": "id",
+              "value": "3",
+              "active": true
+            }
+          ],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "name": "Test Error Middlewares",
+          "method": "GET",
+          "endpoint": "<<host>>/error",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/x-www-form-urlencoded",
+            "body": ""
+          },
+          "requestVariables": [],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "name": "Get DB users",
+          "method": "GET",
+          "endpoint": "<<host>>/db-users",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/x-www-form-urlencoded",
+            "body": ""
+          },
+          "requestVariables": [],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "name": "Get protected route test",
+          "method": "GET",
+          "endpoint": "<<host>>/protected-route",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzc3ODM5MjQzLCJleHAiOjE3Nzc4NTM2NDN9.JuJGdZof2gfPO0_cjAy1J05M93bMfjl3TRFYNM10V0U",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/x-www-form-urlencoded",
+            "body": ""
+          },
+          "requestVariables": [],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "name": "Post Register user",
+          "method": "POST",
+          "endpoint": "<<host>>/register",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"jose\",\n  \"email\": \"joses@mail.com\",\n  \"password\": \"123456\"\n}\n"
+          },
+          "requestVariables": [],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "name": "Post Login",
+          "method": "POST",
+          "endpoint": "<<host>>/login",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"email\": \"joses@mail.com\",\n  \"password\": \"123456\"\n}\n"
+          },
+          "requestVariables": [],
+          "responses": {},
+          "description": null
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "variables": [],
+      "description": null,
+      "preRequestScript": "",
+      "testScript": ""
+    },
+    {
+      "v": 12,
+      "id": "cmow0687t3nyah01la0mul4h9",
+      "name": "Reservations",
+      "folders": [],
+      "requests": [
+        {
+          "v": "17",
+          "name": "Delete reservation",
+          "method": "DELETE",
+          "endpoint": "<<host>>/api/reservations/<<pk>>",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc4MTg4NDIxLCJleHAiOjE3NzgxOTIwMjF9.ItCkxBbRVIqBj1Cx3VkjqAfm9BFRgqJBkmdGMEz5A2U",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": ""
+          },
+          "requestVariables": [
+            {
+              "key": "pk",
+              "value": "7",
+              "active": true
+            }
+          ],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "name": "Post create reservation",
+          "method": "POST",
+          "endpoint": "<<host>>/api/reservations/",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc4MTg4NDIxLCJleHAiOjE3NzgxOTIwMjF9.ItCkxBbRVIqBj1Cx3VkjqAfm9BFRgqJBkmdGMEz5A2U",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n\n  \"date\": \"2026-05-12T00:00:00.000Z\",\n  \"userId\": 5,\n  \"timeBlockId\": 6,\n\n}\n"
+          },
+          "requestVariables": [],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "name": "Put reservation PK",
+          "method": "PUT",
+          "endpoint": "<<host>>/api/reservations/<<pk>>",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc4MTg4NDIxLCJleHAiOjE3NzgxOTIwMjF9.ItCkxBbRVIqBj1Cx3VkjqAfm9BFRgqJBkmdGMEz5A2U",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"id\": 4,\n  \"date\": \"2026-05-10T00:00:00.000Z\",\n  \"userId\": 5,\n  \"timeBlockId\": 6,\n\n}\n"
+          },
+          "requestVariables": [
+            {
+              "key": "pk",
+              "value": "4",
+              "active": true
+            }
+          ],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "name": "Get reservation PK",
+          "method": "GET",
+          "endpoint": "<<host>>/api/reservations/<<pk>>",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NzgxODg2MzYsImV4cCI6MTc3ODE5MjIzNn0.PqOLGdW29qr2sdYuj0941byoe3v7Joq-sQ3qpyoznw4",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": ""
+          },
+          "requestVariables": [
+            {
+              "key": "pk",
+              "value": "4",
+              "active": true
+            }
+          ],
+          "responses": {},
+          "description": null
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "variables": [],
+      "description": null,
+      "preRequestScript": "",
+      "testScript": ""
+    }
+  ],
+  "requests": [
+    {
+      "v": "17",
+      "name": "Post Login",
+      "method": "POST",
+      "endpoint": "<<prod>>/api/auth/login",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": "application/json",
+        "body": "{\n  \"email\": \"emerson@mail.com\",\n  \"password\": \"123456\"\n}\n"
+      },
+      "requestVariables": [],
+      "responses": {},
+      "description": null
+    },
+    {
+      "v": "17",
+      "name": "Post Register",
+      "method": "POST",
+      "endpoint": "<<prod>>/api/auth/register",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": "application/json",
+        "body": "{\n  \"name\": \"emerson\",\n  \"email\": \"emerson@mail.com\",\n  \"password\": \"123456\"\n}\n"
+      },
+      "requestVariables": [],
+      "responses": {},
+      "description": null
+    },
+    {
+      "v": "17",
+      "name": "Post time-blocks",
+      "method": "POST",
+      "endpoint": "<<host>>/api/admin/time-blocks",
+      "params": [],
+      "headers": [
+        {
+          "key": "Authorization",
+          "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc4MTE4MjM3LCJleHAiOjE3NzgxMjE4Mzd9.Dm30LL6EJ28QhHf2J1zti6uQtNIVTNJBVDyib1_SAMQ",
+          "active": true,
+          "description": ""
+        }
+      ],
+      "preRequestScript": "",
+      "testScript": "",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": "application/json",
+        "body": "{\n  \"startTime\": \"2023-10-01T00:00:00Z\",\n  \"endTime\": \"2023-10-02T00:00:00Z\"\n}"
+      },
+      "requestVariables": [],
+      "responses": {},
+      "description": null
+    },
+    {
+      "v": "17",
+      "name": "Get user reservations",
+      "method": "GET",
+      "endpoint": "<<prod>>/api/users/<<pk>>/appointments",
+      "params": [],
+      "headers": [
+        {
+          "key": "Authorization",
+          "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6IlVTRVIiLCJpYXQiOjE3Nzg1OTY1MjEsImV4cCI6MTc3ODYwMDEyMX0.NfyIz_grsStSLUdfglVJdMILTZz6xls5Z1PKplJL_5w",
+          "active": true,
+          "description": ""
+        }
+      ],
+      "preRequestScript": "",
+      "testScript": "",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": "application/json",
+        "body": ""
+      },
+      "requestVariables": [
+        {
+          "key": "pk",
+          "value": "4",
+          "active": true
+        }
+      ],
+      "responses": {},
+      "description": null
+    },
+    {
+      "v": "17",
+      "name": "Post reservations - Duplicar",
+      "method": "GET",
+      "endpoint": "<<host>>/api/admin/reservations",
+      "params": [],
+      "headers": [
+        {
+          "key": "Authorization",
+          "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc4MTE4MjM3LCJleHAiOjE3NzgxMjE4Mzd9.Dm30LL6EJ28QhHf2J1zti6uQtNIVTNJBVDyib1_SAMQ",
+          "active": true,
+          "description": ""
+        }
+      ],
+      "preRequestScript": "",
+      "testScript": "",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": "application/json",
+        "body": ""
+      },
+      "requestVariables": [],
+      "responses": {},
+      "description": null
+    }
+  ],
+  "auth": {
+    "authType": "none",
+    "authActive": true
+  },
+  "headers": [],
+  "variables": [
+    {
+      "key": "host",
+      "initialValue": "http://localhost:3005",
+      "currentValue": "",
+      "secret": false
+    }
+  ],
+  "description": null,
+  "preRequestScript": "",
+  "testScript": ""
+}
